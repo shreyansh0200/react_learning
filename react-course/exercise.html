@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>React Basics</title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+      const socksPrice = 10 * prompt("no. of socks you want");
+      const t_sirtsPrice = 8 * prompt("number of t-shirts you want");
+      const total = socksPrice + t_sirtsPrice;
+      const sipping_cost=30;
+      const div2 = (
+        <div>
+          <h1>Socks Price: {socksPrice}</h1>
+          <h1>T-Shirts Price: {t_sirtsPrice}</h1>
+          <h1>Product Cost: {total}</h1>
+          <h1>Sipping Cost: {sipping_cost}</h1>
+          <h1>Total Cost: {total+sipping_cost}</h1>
+          
+
+        </div>
+      );
+
+      const container = document.querySelector('.js-container');
+      ReactDOM.createRoot(container).render(div2);
+    </script>
+  </body>
+</html>
