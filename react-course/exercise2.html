@@ -12,17 +12,31 @@
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
 
-      function App(){
+      function  LoginForm(){
         return (
-            <div>
+            <>
+
+                
                 <p>Hello, welcome to my website </p>
+                <div><input  placeholder="Name" /></div>
+                <div>  <input  placeholder="Password"  /></div> 
+                  
+                 
+
                 <span>
                     <button>Login</button>  
                     <button>Sign up</button>  
                 </span>
 
 
-            </div>
+            </>
+
+        );
+      }
+
+      function App(){
+        return (
+            <LoginForm/>            
         );
       }
 

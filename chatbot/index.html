@@ -6,24 +6,66 @@
   <body>
     <div class="js-container"></div>
 
+    <script src="https://unpkg.com/supersimpledev@8.0.1/chatbot.js" ></script>
     <script src="https://unpkg.com/supersimpledev/react.js"></script>
     <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
 
     <script src="https://unpkg.com/supersimpledev/babel.js"></script>
     <script type="text/babel">
-        function ChatInput(){
+        function ChatInput({chatMessage,setChatMessage}){
+            const [inputText,setInputText]=React.useState('');
+
+            function sentMessage(){ 
+                
+                const newChatMessage=[
+                    ...chatMessage,
+                        {
+                            message: inputText,
+                            sender: "user",
+                            id: crypto.randomUUID()
+                        }
+
+                ]
+                setChatMessage(newChatMessage);
+                const response=Chatbot.getResponse(inputText);
+                setChatMessage([
+                    ...newChatMessage,
+                        {
+                            message: response,
+                            sender: "robot",
+                            id: crypto.randomUUID()
+                        }
+
+                    ]);
+
+
+
+
+
+                    setInputText('');
+
+                }
+            function saveInputText(event){
+                     setInputText(event.target.value);
+            }
           
             return (
+                <>
+                    <input 
+                        placeholder="send message to chatbot"
+                        size="30"
+                        onChange={saveInputText}
+                        value={inputText}
+                    />
+                    <button
+                        onClick={sentMessage}
+                    >Send</button>
 
-
-            <>
-                <input placeholder="send message to chatbot"/>
-                Send
-
-            </>
+                </>
         )
 
         };
+
         function ChatMessage({message,sender}){
             return (
              <div>
@@ -37,45 +79,65 @@
                 )}
              </div>
         )
-
-
         };
+    /*--------------------------------------------------------------*/
+
+        function ChatMessages({chatMessage}){     
+                     
+            return (
+                <>
+
+                {chatMessage.map((chatMessage)=>{
+                        return (
+                            <ChatMessage
+                                message={chatMessage.message}
+                                sender={chatMessage.sender}
+                                key={chatMessage.id}
+                            />
+                        );
+                    })}
+                </>
+            )        
+            
+        }
+            /*--------------------------------------------------------------*/
+ 
+
         function App(){
+
+            const [chatMessage,setChatMessage] =React.useState([
+
+                {message: "hello chatbot",
+                        sender: "user",
+                        id: "id1"
+                },
+                {message: "How can i help you!",
+                        sender: "robot",
+                        id: "id2"
+                }
+            ])
+
+
+
             return(
                 <>
-                                <ChatInput/>
-                                <ChatMessage
-                                    message="hello chatbot"
-                                    sender="user"
-                                />
-                                <ChatMessage
-                                    message="How can i help you!"
-                                    sender="robot"
-                                />
+                    <ChatInput
+                        chatMessage={chatMessage}
+                        setChatMessage={setChatMessage}                    
+                    />
+                    <ChatMessages
+                        chatMessage={chatMessage}                    
+                    />
+                    
 
-                            </>
+                </>
             );
             
         };
 
 
 
-        const app=(
-            
-                <>
-                    <ChatInput/>
-                    <ChatMessage
-                        message="hello chatbot"
-                        sender="user"
-                    />
-                    <ChatMessage
-                        message="How can i help you!"
-                        sender="robot"
-                    />
-
-                </>
-
-            );
+       
         
         
 
