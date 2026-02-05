@@ -37,11 +37,6 @@
                         }
 
                     ]);
-
-
-
-
-
                     setInputText('');
 
                 }
@@ -54,8 +49,9 @@
                     <input 
                         placeholder="send message to chatbot"
                         size="30"
-                        onChange={saveInputText}
                         value={inputText}
+                        onChange={saveInputText}
+                        
                     />
                     <button
                         onClick={sentMessage}

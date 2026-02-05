@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>count incrementation </title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+        function Btn({count,setCount}){
+            function clicking(){
+                setCount(count+1);
+                console.log(count)
+
+            }
+
+            function reset(){
+                setCount(0);
+            }
+
+
+            return (
+                <>
+                    <button
+                      onClick={clicking}
+                    >Clicked {count} times</button>
+                    <button
+                      onClick={clicking}
+                    >Clicked {count} times</button>
+                    <button
+                      onClick={reset}
+                    >Reset</button>
+                </>
+            )
+                
+        }
+
+        function App(){
+            
+
+            const [count,setCount]=React.useState(0);
+            
+            return (
+                <Btn
+                   count={count}
+                   setCount={setCount}
+                />
+                
+            );
+        }
+      
+
+
+      
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App/>);
+    </script>
+  </body>
+</html>
