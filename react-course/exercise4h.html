@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>count incrementation </title>
+  </head>
+  <body>
+    <div class="js-container"></div>
+
+    <script src="https://unpkg.com/supersimpledev/react.js"></script>
+    <script src="https://unpkg.com/supersimpledev/react-dom.js"></script>
+
+    <script src="https://unpkg.com/supersimpledev/babel.js"></script>
+    <script type="text/babel">
+
+        function Btn({count,setCount}){
+            const buttonRef = React.useRef(null);
+            const intervalRef = React.useRef(null);
+            function clicking(){
+                setCount(count+1);  
+                console.log(count)
+
+            }
+            
+
+            function reset() {
+            setCount(0);
+            // stop the interval when reset is clicked
+                if (intervalRef.current) {
+                    clearInterval(intervalRef.current);
+                    intervalRef.current = null;
+                }
+            }
+            
+
+
+            
+            function auto(){
+              const buttonEle = buttonRef.current;
+              if(intervalRef.current){
+                clearInterval(intervalRef.current);/*stoping the task assign to clear interval*/
+                intervalRef.current = null;
+              }
+              if(buttonEle && intervalRef!=null) {
+                intervalRef.current=setInterval(()=>{
+                  buttonEle.click();
+                  
+                }, 1000);
+              }
+            }
+
+
+            return (
+                <>
+                    <button
+                      onClick={clicking}
+                      ref={buttonRef}
+                    >Clicked {count} times</button>
+                    <button
+                      onClick={auto}
+                    >Auto</button>
+                    <button
+                      onClick={reset}
+                    >Reset</button>
+                </>
+            )
+                
+        }
+
+        function App(){
+            
+
+            const [count,setCount]=React.useState(0);
+            
+            return (
+                <Btn
+                   count={count}
+                   setCount={setCount}
+                />
+                
+            );
+        }
+      
+
+
+      
+
+        const container = document.querySelector('.js-container');
+        ReactDOM.createRoot(container).render(<App/>);
+    </script>
+  </body>
+</html>
