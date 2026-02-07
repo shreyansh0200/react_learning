@@ -15,11 +15,14 @@ function App(){
 
                 {message: "hello chatbot",
                         sender: "user",
-                        id: "id1"
+                        id: "id1",
+                        time: "__"
+                        
                 },
                 {message: "How can i help you!",
                         sender: "robot",
                         id: "id2"
+                        ,time: "__"
                 }
             ])
 
